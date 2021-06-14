@@ -88,6 +88,16 @@ if db_engine_name == "sqlite3":
             'NAME': BASE_DIR / 'data/mventory.sqlite3',
         }
     }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': DB_ENGINE,
+            'NAME': os.getenv('MVENTORY_DB_NAME'),
+            'HOST': os.getenv('MVENTORY_DB_HOST'),
+            'USER': os.getenv('MVENTORY_DB_USER'),
+            'PASSWORD': os.getenv('MVENTORY_DB_PASSWORD'),
+        }
+    }
 
 
 # Password validation

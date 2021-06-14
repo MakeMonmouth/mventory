@@ -38,4 +38,36 @@ This may feel like overkill for a small home setup, but if you're working in a M
 
 ## How do I install it?
 
+This is a standard Django Application, so whilst we're not at a point to release a containerised version yet, you can get up and running with the following commands after cloning this repo to your machine:
+
+```bash
+$ mkvirtualenv mventory
+$ pip install -r requirements.txt
+$ echo "MVENTORY_SECRET_KEY=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)" >> .env
+$ ./manage.py migrate
+$ ./manage.py createsuperuser # Create your initial user
+$ ./manage.py runserver
+```
+
+You can then browse to http://localhost:8000/admin and log in to create your buildings, rooms, and other sections/components.
+
+### Database configuration
+
+By default, the platform uses a SQLite3 database stored in the `data` directory.  Once we get to a containerised version, we'll be able to mount this directory outside the container allowing for data persistence during a container upgrade, however for now it's just a simple file.
+
+The database is configured via environment variables.
+
+The simplest way to get up and running with the system is to add the following to the `.env` file created above and then `source` that file:
+
+```bash
+export MVENTORY_DB_ENGINE=<database engine>
+export MVENTORY_DB_HOST=<database server>
+export MVENTORY_DB_USER=<database user name>
+export MVENTORY_DB_PASSWORD=<database password>
+```
+Once you've done this, restart the server using `./manage.py runserver` and you should be connected to your database server instead.
+
+**NOTE:** The `MVENTORY_DB_ENGINE` value should be one of the engines from https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DATABASE-ENGINE *without* the `django.db.backends.` part, so `mysql` or `postgresql`.
+
+
 ## How do I contribute?
