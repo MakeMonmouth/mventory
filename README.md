@@ -38,12 +38,13 @@ This may feel like overkill for a small home setup, but if you're working in a M
 
 ## How do I install it?
 
-This is a standard Django Application, so whilst we're not at a point to release a containerised version yet, you can get up and running with the following commands after cloning this repo to your machine:
+This is a standard Django Application, you can get up and running with the following commands after cloning this repo to your machine:
 
 ```bash
 $ mkvirtualenv mventory
 $ pip install -r requirements.txt
 $ echo "MVENTORY_SECRET_KEY=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)" >> .env
+$ source .env
 $ ./manage.py migrate
 $ ./manage.py createsuperuser # Create your initial user
 $ ./manage.py runserver

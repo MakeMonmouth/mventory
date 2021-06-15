@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('MVENTORY_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('MVENTORY_DEBUG') or False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv('MVENTORY_HOSTNAME')]
 
 
 # Application definition
