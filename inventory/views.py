@@ -1,10 +1,17 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Building, Room, StorageUnit, StorageBin
+from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
 from rest_framework import viewsets
 from rest_framework import permissions
-from inventory.serializers import BuildingSerializer, RoomSerializer, StorageUnitSerializer, StorageBinSerializer
+from inventory.serializers import (
+        BuildingSerializer,
+        RoomSerializer,
+        StorageUnitSerializer,
+        StorageBinSerializer,
+        ComponentSerializer,
+        ComponentMeasurementUnitSerializer
+        )
 
 
 class BuildingViewSet(viewsets.ModelViewSet):
@@ -40,4 +47,22 @@ class StorageBinViewSet(viewsets.ModelViewSet):
     """
     queryset = StorageBin.objects.all()
     serializer_class = StorageBinSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ComponentViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Component.objects.all()
+    serializer_class = ComponentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class ComponentMeasurementUnitViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = ComponentMeasurementUnit.objects.all()
+    serializer_class = ComponentMeasurementUnitSerializer
     permission_classes = [permissions.IsAuthenticated]

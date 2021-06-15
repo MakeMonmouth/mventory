@@ -23,6 +23,8 @@ router.register(r'buildings', views.BuildingViewSet)
 router.register(r'rooms', views.RoomViewSet)
 router.register(r'storage_units', views.StorageUnitViewSet)
 router.register(r'storage_bins', views.StorageBinViewSet)
+router.register(r'components', views.ComponentViewSet)
+router.register(r'component_measurements', views.ComponentMeasurementUnitViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
