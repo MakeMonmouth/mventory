@@ -70,5 +70,38 @@ Once you've done this, restart the server using `./manage.py runserver` and you 
 
 **NOTE:** The `MVENTORY_DB_ENGINE` value should be one of the engines from https://docs.djangoproject.com/en/3.2/ref/settings/#std:setting-DATABASE-ENGINE *without* the `django.db.backends.` part, so `mysql` or `postgresql`.
 
+### Running via Docker
+
+Containers are available for the following architectures:
+
+   * AMD64
+   * ARMv6
+   * ARMv7
+   * ARM64
+
+This should allow you to easily deploy Mventory on all kinds of platforms from enterprise servers to Raspberry Pi-style devices.
+
+The container is [available from the packages page](https://github.com/users/proffalken/packages/container/package/mventory) and you'll want to pass the following environment variables to your container in order to get up and running:
+
+```bash
+export MVENTORY_DB_ENGINE=<database engine>
+export MVENTORY_DB_HOST=<database server>
+export MVENTORY_DB_USER=<database user name>
+export MVENTORY_DB_PASSWORD=<database password>
+export MVENTORY_SECRET=<some random string>
+```
+
+The container exposes the service on port 8000, and once you've got the container up and running you'll need to run the migrations and create the admin user as follows:
+
+```bash
+$ docker ps | grep mventory # Get the Container ID from here
+$ docker exec -ti <container id from above> /bin/bash
+> ./manage.py migrate # Run this inside the container
+> ./manage.py createsuperuser # Run this inside the container
+```
+
+Once you've done this, you should be able to visit the container in a web browser and log in with your superuser credentials.
 
 ## How do I contribute?
+
+More detail is needed here, but essentially just fork the repo, make your changes on a branch and submit a PR - we look forward to seeing your contributions!
