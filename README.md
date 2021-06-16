@@ -106,17 +106,17 @@ Once you've done this, you should be able to visit the container in a web browse
 
 It's an API, so there isn't really a pretty interface for this (in fact, I'm hoping someone else will write one because it's really not where my skills lie!) however this is what you'll see in a browser if you visit the system once it's up and running:
 
-![The API Home Page](media/APIHomePage.png)
 The API Home Page
+![The API Home Page](media/APIHomePage.png)
 
-![The API Component Page](media/ComponentPage.png)
 One of the API Detail pages (in this case, the one for components)
+![The API Component Page](media/ComponentPage.png)
 
+The Admin home page (available at http://deployment.url/admin)
 ![The Admin Home Page](media/AdminHomePage.png)
-The Admin home page (available at http://<deployment url>/admin)
 
-![The Admin Component Page](media/AdminComponentPage.png)
 The Admin page for a component
+![The Admin Component Page](media/AdminComponentPage.png)
 
 ## How do I contribute?
 
