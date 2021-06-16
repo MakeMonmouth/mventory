@@ -2,8 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions, filters
 from inventory.serializers import (
         BuildingSerializer,
         RoomSerializer,
@@ -54,9 +53,11 @@ class ComponentViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Component.objects.all()
-    serializer_class = ComponentSerializer
+    filter_backends = (filters.SearchFilter,)
     permission_classes = [permissions.IsAuthenticated]
+    queryset = Component.objects.all()
+    search_fields = ["name", "product_code"]
+    serializer_class = ComponentSerializer
 
 
 class ComponentMeasurementUnitViewSet(viewsets.ModelViewSet):

@@ -118,6 +118,28 @@ The Admin home page (available at http://deployment.url/admin)
 The Admin page for a component
 ![The Admin Component Page](media/AdminComponentPage.png)
 
+## How does it work?
+
+MVentory is API-driven, this means that there's no nice UI to look at, but it does "self-document".
+
+If you go to your installation in a browser you'll see a fairly boring set of web-pages that allow you to list the various buildings, rooms, storage units, storage bins, and components and add new ones, but the power of this platform really comes alive when you write your own integration with it.
+
+In the spirit of the Unix philosophy of "do one thing and do it well", all this system does is store information about how many things you have and where they're stored, along with some useful other information such as the unit of measurement for each component.
+
+Front-ends can then be written in *any* language to talk to the API and retrieve that information in JSON format so it can be displayed to the user or integrated as part of a robotic retrieval system.
+
+Here's a few example calls to the API from the command line:
+
+```bash
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/components/ # list all components in the system
+
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/rooms/ # list all rooms in the system
+
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/components/?search=555 # return all components with the value "555" in their name or product id
+```
+
+More features will be added in future, so keep an eye on the [issue tracker](https://github.com/proffalken/mventory/labels/enhancement) to see what's coming up!
+
 ## How do I contribute?
 
 More detail is needed here, but essentially just fork the repo, make your changes on a branch and submit a PR - we look forward to seeing your contributions!
