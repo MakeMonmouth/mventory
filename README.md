@@ -85,11 +85,14 @@ The container is [available from the packages page](https://github.com/users/pro
 
 ```bash
 export MVENTORY_DB_ENGINE=<database engine>
+export MVENTORY_DB_NAME=<database name>
 export MVENTORY_DB_HOST=<database server>
 export MVENTORY_DB_USER=<database user name>
 export MVENTORY_DB_PASSWORD=<database password>
-export MVENTORY_SECRET=<some random string>
+export MVENTORY_SECRET_KEY=<some random string>
 ```
+
+**NOTE: All the `DB_` variables are required if you want to connect to MySQL, if you want to use the built-in SQLite3 database then you can omit these**
 
 The container exposes the service on port 8000, and once you've got the container up and running you'll need to run the migrations and create the admin user as follows:
 
