@@ -22,7 +22,7 @@ class BuildingViewSet(viewsets.ModelViewSet):
     """
     queryset = Building.objects.all().order_by('name')
     serializer_class = BuildingSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class RoomViewSet(viewsets.ModelViewSet):
@@ -31,7 +31,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     """
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class StorageUnitViewSet(viewsets.ModelViewSet):
@@ -40,7 +40,7 @@ class StorageUnitViewSet(viewsets.ModelViewSet):
     """
     queryset = StorageUnit.objects.all()
     serializer_class = StorageUnitSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class StorageBinViewSet(viewsets.ModelViewSet):
@@ -49,7 +49,7 @@ class StorageBinViewSet(viewsets.ModelViewSet):
     """
     queryset = StorageBin.objects.all()
     serializer_class = StorageBinSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class ComponentViewSet(viewsets.ModelViewSet):
@@ -57,7 +57,7 @@ class ComponentViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     filter_backends = (filters.SearchFilter,)
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Component.objects.all()
     search_fields = ["name", "product_code"]
     serializer_class = ComponentSerializer
@@ -69,4 +69,4 @@ class ComponentMeasurementUnitViewSet(viewsets.ModelViewSet):
     """
     queryset = ComponentMeasurementUnit.objects.all()
     serializer_class = ComponentMeasurementUnitSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
