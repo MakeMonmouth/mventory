@@ -131,14 +131,14 @@ In the spirit of the Unix philosophy of "do one thing and do it well", all this 
 
 Front-ends can then be written in *any* language to talk to the API and retrieve that information in JSON format so it can be displayed to the user or integrated as part of a robotic retrieval system.
 
-Here's a few example calls to the API from the command line:
+Here's a few example calls to the REST API from the command line:
 
 ```bash
-curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/components/ # list all components in the system
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/rest/components/ # list all components in the system
 
-curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/rooms/ # list all rooms in the system
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/rest/rooms/ # list all rooms in the system
 
-curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/components/?search=555 # return all components with the value "555" in their name or product id
+curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/rest/components/?search=555 # return all components with the value "555" in their name or product id
 ```
 
 More features will be added in future, so keep an eye on the [issue tracker](https://github.com/proffalken/mventory/labels/enhancement) to see what's coming up!

@@ -27,7 +27,8 @@ router.register(r'components', views.ComponentViewSet)
 router.register(r'component_measurements', views.ComponentMeasurementUnitViewSet)
 
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('rest/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

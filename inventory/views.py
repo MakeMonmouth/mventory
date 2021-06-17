@@ -13,6 +13,9 @@ from inventory.serializers import (
         )
 
 
+def index(request):
+    return render(request, 'index.html')
+
 class BuildingViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
