@@ -2,6 +2,11 @@
 
 An inventory solution for Makers
 
+![GitGuardian Security Checks](https://github.com/proffalken/mventory/actions/workflows/gitguardian.yml/badge.svg)
+ ![Django Tests](https://github.com/proffalken/mventory/actions/workflows/django_checks.yml/badge.svg)
+ ![Container Builds](https://github.com/proffalken/mventory/actions/workflows/django_checks.yml/badge.svg)
+
+
 ## What is it?
 
 Mventory is an API-driven inventory solution for Makers, Makerspaces, Hackspaces, and just about anyone else who needs to keep track of "stuff".
