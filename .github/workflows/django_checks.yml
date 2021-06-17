@@ -66,4 +66,4 @@ jobs:
         MVENTORY_DB_PASSWORD: hunter2
         MVENTORY_SECRET_KEY: ${{ secrets.MVENTORY_SECRET_KEY }}
       run: |
-        python manage.py test
+        python manage.py test -v 2
