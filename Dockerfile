@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM python:3
 ENV PYTHONUNBUFFERED=1
-RUN apt update && apt upgrade
+RUN apt update && apt upgrade -y
 WORKDIR /opt/app
 COPY requirements.txt /opt/app/
 RUN pip install -r requirements.txt
