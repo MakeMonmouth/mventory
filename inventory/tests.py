@@ -29,7 +29,9 @@ class RestComponentTest(TestCase):
         test_com = models.Component.objects.create(
                 name="My First Component",
                 measurement_unit = test_mu,
-                product_code = "mfc-000001",
+                sku = "mfc-000001",
+                upc = "123456789101",
+                mpn = "test-part-01",
                 qty = 12
                 )
         test_com.storage_bin.add(test_sb)

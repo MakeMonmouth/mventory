@@ -50,7 +50,9 @@ class StorageBin(models.Model):
 
 class Component(models.Model):
     name = models.CharField(max_length=200)
-    product_code = models.CharField(max_length=100)
+    sku = models.CharField(max_length=100)
+    mpn = models.CharField(max_length=100, null=True, blank=True)
+    upc = models.IntegerField(null=True, blank=True)
     storage_bin = models.ManyToManyField(StorageBin)
     measurement_unit = models.ForeignKey(ComponentMeasurementUnit, on_delete=models.CASCADE)
     qty = models.IntegerField(default=0, validators=[MinValueValidator(0)])
