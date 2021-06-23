@@ -26,7 +26,7 @@ class StorageBinSerializer(serializers.HyperlinkedModelSerializer):
 class ComponentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Component
-        fields = ['url', 'name', 'product_code', 'storage_bin','measurement_unit', 'qty']
+        fields = ['url', 'name', 'sku', 'mpn', 'upc', 'storage_bin','measurement_unit', 'qty']
 
 class ComponentMeasurementUnitSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
