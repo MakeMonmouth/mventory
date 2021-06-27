@@ -1,6 +1,8 @@
 asgiref==3.3.4
 Django==3.2.4
+django-bulma==0.8.2
 djangorestframework==3.12.4
 mysqlclient==2.0.3
 pytz==2021.1
+six==1.16.0
 sqlparse==0.4.1
