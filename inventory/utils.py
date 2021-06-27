@@ -26,13 +26,25 @@ class OctopartClient:
         if self.token is not None:
             headers[self.headername] = '{}'.format(self.token)
 
-        req = urllib.request.Request(self.endpoint, json.dumps(data).encode('utf-8'), headers)
-        
-        try:
-            response = urllib.request.urlopen(req)
-            return response.read().decode('utf-8')
-        except urllib.error.HTTPError as e:
-            raise e
+            req = urllib.request.Request(self.endpoint, json.dumps(data).encode('utf-8'), headers)
+            
+            try:
+                response = urllib.request.urlopen(req)
+                return response.read().decode('utf-8')
+            except urllib.error.HTTPError as e:
+                raise e
+        else:
+            response= json.dumps({
+                "data": {
+                    "multi_match": 
+                        [
+                            {
+                            "hits": 0
+                            }
+                            ]
+                    }
+                })
+            return response
 
     def get_parts(self, ids):
         query = '''
