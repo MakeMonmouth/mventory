@@ -32,8 +32,6 @@ class OctopartClient:
             response = urllib.request.urlopen(req)
             return response.read().decode('utf-8')
         except urllib.error.HTTPError as e:
-            print((e.read()))
-            print('')
             raise e
 
     def get_parts(self, ids):
@@ -53,7 +51,6 @@ class OctopartClient:
         '''
 
         ids = [str(id) for id in ids]
-        print(ids)
         resp = self.execute(query, {'ids': ids})
         return json.loads(resp)['data']['parts']
 
@@ -64,6 +61,12 @@ class OctopartClient:
                 hits
                 reference
                 parts {
+                    document_collections {
+                      documents {
+                        name
+                        url
+                      }
+                    }
                     manufacturer {
                         name
                     }

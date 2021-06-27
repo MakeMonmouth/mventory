@@ -1,3 +1,4 @@
+from .utils import OctopartClient
 from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
 from rest_framework import serializers
 
@@ -24,9 +25,24 @@ class StorageBinSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['url', 'name', 'short_code', 'unit_row','unit_column', 'storage_unit']
 
 class ComponentSerializer(serializers.HyperlinkedModelSerializer):
+    octopart_data = serializers.SerializerMethodField()
+
+    def get_octopart_data(self, obj):
+        op_data = {}
+        if obj.mpn is not None:
+            oc = OctopartClient()
+            parts_res = oc.match_mpns([obj.mpn])
+            op_data["hits"] = parts_res[0]["hits"]
+            for doc in parts_res[0]["parts"][0]["document_collections"][0]["documents"]:
+                if doc["name"] == "Datasheet":
+                    op_data["datasheet_url"] = doc["url"]
+                else:
+                    op_data["datasheet_url"] = None
+        return op_data
+
     class Meta:
         model = Component
-        fields = ['url', 'name', 'sku', 'mpn', 'upc', 'storage_bin','measurement_unit', 'qty']
+        fields = ['url', 'name', 'sku', 'mpn', 'upc', 'octopart_data', 'storage_bin','measurement_unit', 'qty']
         depth = 4
 
 class ComponentMeasurementUnitSerializer(serializers.HyperlinkedModelSerializer):
