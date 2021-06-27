@@ -65,5 +65,6 @@ jobs:
         MVENTORY_DB_PORT: ${{ matrix.db_port }}
         MVENTORY_DB_PASSWORD: hunter2
         MVENTORY_SECRET_KEY: ${{ secrets.MVENTORY_SECRET_KEY }}
+        MVENTORY_OCTOPART_API_KEY: ${{ secrets.MVENTORY_OCTOPART_API_KEY }}
       run: |
         python manage.py test -v 2
