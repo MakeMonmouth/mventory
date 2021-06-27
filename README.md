@@ -41,6 +41,12 @@ Finally, Rooms live inside "Buildings".
 
 This may feel like overkill for a small home setup, but if you're working in a Makerspace that has multiple units on a yard or similar then it could be incredibly useful!
 
+### Octopart Support
+
+The platform now has *very* basic support for Octopart.  If you fill in the `mpn` (Manufacturer's Part Number) on a component it will return the first datasheet it finds on Octopart as a URL to the PDF.
+
+In future, I hope to add the ability to return images of the product and many more of the product details that are available, so if you'd like [a specific field from the Octopart API](https://octopart.com/api/v4/reference) returned, just [file an issue](https://github.com/proffalken/mventory/issues)!
+
 ## How do I install it?
 
 This is a standard Django Application, you can get up and running with the following commands after cloning this repo to your machine:
