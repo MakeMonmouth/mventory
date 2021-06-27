@@ -49,6 +49,7 @@ This is a standard Django Application, you can get up and running with the follo
 $ mkvirtualenv mventory
 $ pip install -r requirements.txt
 $ echo "MVENTORY_SECRET_KEY=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)" >> .env
+$ echo "MVENTORY_OCTOPART_API_KEY=<your octopart.com api key> >> .env"
 $ source .env
 $ ./manage.py migrate
 $ ./manage.py createsuperuser # Create your initial user
@@ -95,6 +96,7 @@ export MVENTORY_DB_HOST=<database server>
 export MVENTORY_DB_USER=<database user name>
 export MVENTORY_DB_PASSWORD=<database password>
 export MVENTORY_SECRET_KEY=<some random string>
+export MVENTORY_OCTOPART_API_KEY=<your octopart.com API key>
 ```
 
 **NOTE: All the `DB_` variables are required if you want to connect to MySQL, if you want to use the built-in SQLite3 database then you can omit these**

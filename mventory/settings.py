@@ -147,3 +147,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
             'TEST_REQUEST_DEFAULT_FORMAT': 'json'
             }
+
+# Octopart
+OCTOPART_API_KEY=os.getenv('MVENTORY_OCTOPART_API_KEY')
