@@ -150,3 +150,4 @@ REST_FRAMEWORK = {
 
 # Octopart
 OCTOPART_API_KEY=os.getenv('MVENTORY_OCTOPART_API_KEY')
+OCTOPART_API_ENDPOINT='https://octopart.com/api/v4/endpoint'
