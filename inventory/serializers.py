@@ -27,8 +27,9 @@ class ComponentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Component
         fields = ['url', 'name', 'sku', 'mpn', 'upc', 'storage_bin','measurement_unit', 'qty']
+        depth = 4
 
 class ComponentMeasurementUnitSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ComponentMeasurementUnit
-        fields = ['url', 'name', 'description']
+        fields = ['url', 'unit_name', 'unit_description']
