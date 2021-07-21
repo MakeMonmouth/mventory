@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_prometheus',
     'rest_framework',
     'inventory.apps.InventoryConfig'
 ]
 
 MIDDLEWARE = [
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware'
 ]
 
 ROOT_URLCONF = 'mventory.urls'
@@ -79,12 +82,12 @@ WSGI_APPLICATION = 'mventory.wsgi.application'
 
 # Get Database Settings from the Environment
 db_engine_name = os.getenv('MVENTORY_DB_ENGINE') or "sqlite3"
-DB_ENGINE = f"django.db.backends.{db_engine_name}"
+DB_ENGINE = f"django_prometheus.db.backends.{db_engine_name}"
 
 if db_engine_name == "sqlite3":
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
+            'ENGINE': 'django_prometheus.db.backends.sqlite3',
             'NAME': BASE_DIR / 'data/mventory.sqlite3',
         }
     }
