@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 
+import logging_loki
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -151,3 +153,41 @@ REST_FRAMEWORK = {
 # Octopart
 OCTOPART_API_KEY=os.getenv('MVENTORY_OCTOPART_API_KEY')
 OCTOPART_API_ENDPOINT='https://octopart.com/api/v4/endpoint'
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '[%(asctime)s] {%(module)s} [%(levelname)s] - %(message)s',
+            'datefmt': '%d-%m-%Y %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+        'loki': {
+            'level': 'INFO',
+            'class': 'logging_loki.LokiHandler',
+            'url': "https://loki.service.wallace.network/loki/api/v1/push",
+            'tags': {"app": "mventory", "env": "dev"},
+            'version': "1",
+        },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+    }
+}
