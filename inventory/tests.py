@@ -54,11 +54,11 @@ class RestComponentTest(TestCase):
         # Check that the component is returned correctly
         self.assertEqual(component['name'], "My First Component")
 
-    def test_octopart_api(self):
-        apiresponse = self.apiclient.get('/rest/components/1/')
-        component = apiresponse.data
-
-        # Check that we have a hit on the octopart API
-        self.assertEqual(component["octopart_data"]["hits"], 1)
-        # Check that we have a datasheet url
-        self.assertEqual(component["octopart_data"]["datasheet_url"], "https://datasheet.octopart.com/NHD-C128128BZ-FSW-GBW-Newhaven-Display-datasheet-13083747.pdf")
+#    def test_octopart_api(self):
+#        apiresponse = self.apiclient.get('/rest/components/1/')
+#        component = apiresponse.data
+#
+#        # Check that we have a hit on the octopart API
+#        self.assertEqual(component["octopart_data"]["hits"], 1)
+#        # Check that we have a datasheet url
+#        self.assertEqual(component["octopart_data"]["datasheet_url"], "https://datasheet.octopart.com/NHD-C128128BZ-FSW-GBW-Newhaven-Display-datasheet-13083747.pdf")
