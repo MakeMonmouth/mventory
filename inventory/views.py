@@ -69,7 +69,7 @@ class ComponentViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.SearchFilter,)
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Component.objects.all()
-    search_fields = ["name", "product_code"]
+    search_fields = ["name", "sku", "upc"]
     serializer_class = ComponentSerializer
 
 
