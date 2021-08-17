@@ -11,4 +11,4 @@ RUN rm -rf /opt/app/data/*.sqlite3
 
 EXPOSE 8000
 
-ENTRYPOINT ["./manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["./scripts/startup.sh"]
