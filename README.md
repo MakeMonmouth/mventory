@@ -56,6 +56,7 @@ $ mkvirtualenv mventory
 $ pip install -r requirements.txt
 $ echo "MVENTORY_SECRET_KEY=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)" >> .env
 $ echo "MVENTORY_OCTOPART_API_KEY=<your octopart.com api key> >> .env"
+$ echo "MVENTORY_HOSTNAME=<YOUR HOSTNAME OR IP ADDRESS>:<YOUR PORT NUMBER>"
 $ source .env
 $ ./manage.py migrate
 $ ./manage.py createsuperuser # Create your initial user
@@ -63,6 +64,8 @@ $ ./manage.py runserver
 ```
 
 You can then browse to http://localhost:8000/admin and log in to create your buildings, rooms, and other sections/components.
+
+**NOTE:** You **MUST** set the `MVENTORY_HOSTNAME` variable to the correct value in order for this application to work.  This is a [requirement of Django](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts)
 
 ### Database configuration
 
