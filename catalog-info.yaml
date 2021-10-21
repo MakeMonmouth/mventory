@@ -6,6 +6,8 @@ metadata:
   annotations:
     github.com/project-slug: 'makemonmouth/mventory'
     grafana/tag-selector: "mventory"
+    prometheus.io/alert: scrape_duration_seconds{_app="mventory"} > 0.5
+    prometheus.io/rule: scrape_duration_seconds{_app="mventory"} > 0.5
 spec:
   type: website
   owner: matt@doics.co
