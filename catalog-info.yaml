@@ -12,3 +12,19 @@ spec:
   type: website
   owner: matt@doics.co
   lifecycle: production
+  dependsOn: MVentory-Database
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: MVentory-Database
+  description: The database backend for MVentry
+  annotations:
+    github.com/project-slug: 'makemonmouth/mventory'
+    grafana/tag-selector: "mventory"
+    prometheus.io/alert: scrape_duration_seconds{_app="mventory"} > 0.5
+    prometheus.io/rule: scrape_duration_seconds{_app="mventory"} > 0.5
+spec:
+  type: database
+  owner: matt@doics.co
+  lifecycle: production
