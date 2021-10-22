@@ -12,7 +12,8 @@ spec:
   type: website
   owner: matt@doics.co
   lifecycle: production
-  dependsOn: MVentory-Database
+  dependsOn: 
+    - MVentory-Database
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
