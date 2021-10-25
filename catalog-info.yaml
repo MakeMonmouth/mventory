@@ -13,7 +13,7 @@ spec:
   owner: matt@doics.co
   lifecycle: production
   dependsOn: 
-    - MVentory-Database
+    - Resource:default/MVentory-Database
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
