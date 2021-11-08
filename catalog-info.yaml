@@ -7,7 +7,7 @@ metadata:
     github.com/project-slug: 'makemonmouth/mventory'
     grafana/tag-selector: "mventory"
     prometheus.io/alert: HighRequestLatency
-    prometheus.io/rule: Mventory
+    prometheus.io/rule: mventory
 spec:
   type: website
   owner: matt@doics.co
