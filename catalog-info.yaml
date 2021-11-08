@@ -6,8 +6,8 @@ metadata:
   annotations:
     github.com/project-slug: 'makemonmouth/mventory'
     grafana/tag-selector: "mventory"
-    prometheus.io/alert: rate(django_http_requests_latency_including_middlewares_seconds_bucket{_app="mventory",le="0.5"}[5m])
-    prometheus.io/rule: rate(django_http_requests_latency_including_middlewares_seconds_bucket{_app="mventory",le="0.5"}[5m])
+    prometheus.io/alert: HighRequestLatency
+    prometheus.io/rule: HighRequestLatency
 spec:
   type: website
   owner: matt@doics.co
