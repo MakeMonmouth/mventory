@@ -4,7 +4,7 @@ certifi==2021.5.30
 chardet==4.0.0
 charset-normalizer==2.0.3
 Deprecated==1.2.12
-Django==3.2.4
+Django==3.2.9
 django-bulma==0.8.2
 django-loki==0.1.4
 django-prometheus==2.1.0
@@ -22,7 +22,7 @@ opentelemetry-exporter-zipkin==1.7.1
 opentelemetry-exporter-zipkin-json==1.7.1
 opentelemetry-exporter-zipkin-proto-http==1.7.1
 opentelemetry-instrumentation==0.26b1
-opentelemetry-instrumentation-asgi==0.22b0
+opentelemetry-instrumentation-asgi==0.26b1
 opentelemetry-instrumentation-dbapi==0.22b0
 opentelemetry-instrumentation-django==0.26b1
 opentelemetry-instrumentation-logging==0.26b1
