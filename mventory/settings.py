@@ -159,8 +159,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
+        'json': {'()': 'pythonjsonlogger.jsonlogger.JsonFormatter'},
         'standard': {
-            'format': '[%(asctime)s] {%(module)s} [%(levelname)s] - %(message)s',
+            'format': '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s',
             'datefmt': '%d-%m-%Y %H:%M:%S'
         },
     },
@@ -173,9 +174,10 @@ LOGGING = {
         'loki': {
             'level': 'INFO',
             'class': 'logging_loki.LokiHandler',
-            'url': "https://loki.service.wallace.network/loki/api/v1/push",
+            'url': f"{os.getenv('MVENTORY_LOKI_HOST')}/loki/api/v1/push",
             'tags': {"app": "mventory", "env": "dev"},
             'version': "1",
+            'formatter': 'json',
         },
     },
     'loggers': {
