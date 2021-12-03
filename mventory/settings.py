@@ -165,7 +165,7 @@ LOGGING = {
     'formatters': {
         'json': {'()': 'pythonjsonlogger.jsonlogger.JsonFormatter'},
         'standard': {
-            'format': '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [trace_id=%(otelTraceID)s span_id=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s',
+            'format': '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [traceID=%(otelTraceID)s spanID=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s',
             'datefmt': '%d-%m-%Y %H:%M:%S'
         },
     },
@@ -191,6 +191,21 @@ LOGGING = {
             'propagate': True,
         },
         'django': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.security': {
             'handlers': ['loki', 'console'],
             'level': 'DEBUG',
             'propagate': True,
