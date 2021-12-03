@@ -23,12 +23,12 @@ opentelemetry-exporter-zipkin-json==1.7.1
 opentelemetry-exporter-zipkin-proto-http==1.7.1
 opentelemetry-instrumentation==0.26b1
 opentelemetry-instrumentation-asgi==0.26b1
-opentelemetry-instrumentation-dbapi==0.22b0
+opentelemetry-instrumentation-dbapi==0.26b1
 opentelemetry-instrumentation-django==0.26b1
 opentelemetry-instrumentation-logging==0.26b1
-opentelemetry-instrumentation-mysql==0.22b0
+opentelemetry-instrumentation-mysql==0.26b1
 opentelemetry-instrumentation-requests==0.26b1
-opentelemetry-instrumentation-sqlite3==0.22b0
+opentelemetry-instrumentation-sqlite3==0.26b1
 opentelemetry-instrumentation-urllib==0.22b0
 opentelemetry-instrumentation-wsgi==0.26b1
 opentelemetry-propagator-b3==1.7.1
