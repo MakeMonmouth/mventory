@@ -1,8 +1,9 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django_prometheus.models import ExportModelOperationsMixin
 
 # Create your models here.
-class ComponentMeasurementUnit(models.Model):
+class ComponentMeasurementUnit(ExportModelOperationsMixin('ComponentMeasurementUnit'), models.Model):
     unit_name = models.CharField(max_length=10)
     unit_description = models.CharField(max_length=200,null=True, blank=True)
 
@@ -10,7 +11,7 @@ class ComponentMeasurementUnit(models.Model):
         return self.unit_name
 
 
-class Building(models.Model):
+class Building(ExportModelOperationsMixin('Building'), models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200,null=True, blank=True)
     postcode = models.CharField(max_length=20,null=True,blank=True)
@@ -19,7 +20,7 @@ class Building(models.Model):
         return self.name
 
 
-class Room(models.Model):
+class Room(ExportModelOperationsMixin('Room'), models.Model):
     name = models.CharField(max_length=200)
     short_code = models.CharField(max_length=5,null=True,blank=True)
     building = models.ForeignKey(Building, on_delete=models.CASCADE)
@@ -29,7 +30,7 @@ class Room(models.Model):
 
 
 
-class StorageUnit(models.Model):
+class StorageUnit(ExportModelOperationsMixin('StorageUnit'), models.Model):
     name = models.CharField(max_length=200)
     short_code = models.CharField(max_length=5,null=True,blank=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -37,7 +38,7 @@ class StorageUnit(models.Model):
     def __str__(self):
         return self.name
 
-class StorageBin(models.Model):
+class StorageBin(ExportModelOperationsMixin('StorageBin'), models.Model):
     name = models.CharField(max_length=200)
     short_code = models.CharField(max_length=5,null=True,blank=True)
     unit_row = models.CharField(max_length=5,null=True,blank=True)
@@ -48,7 +49,7 @@ class StorageBin(models.Model):
         return self.name
 
 
-class Component(models.Model):
+class Component(ExportModelOperationsMixin('Component'), models.Model):
     name = models.CharField(max_length=200)
     sku = models.CharField(max_length=100)
     mpn = models.CharField(max_length=100, null=True, blank=True)

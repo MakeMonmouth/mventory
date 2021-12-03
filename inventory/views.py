@@ -21,6 +21,8 @@ class BuildingViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Building.objects.all().order_by('name')
+    search_fields = ['name', 'address', 'postcode']
+    filter_backends = (filters.SearchFilter,)
     serializer_class = BuildingSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -30,6 +32,8 @@ class RoomViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Room.objects.all()
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
     serializer_class = RoomSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -39,6 +43,8 @@ class StorageUnitViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = StorageUnit.objects.all()
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
     serializer_class = StorageUnitSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -48,6 +54,8 @@ class StorageBinViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = StorageBin.objects.all()
+    search_fields = ['name', 'short_code']
+    filter_backends = (filters.SearchFilter,)
     serializer_class = StorageBinSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -57,9 +65,11 @@ class ComponentViewSet(viewsets.ModelViewSet):
     API endpoint that allows groups to be viewed or edited.
     """
     filter_backends = (filters.SearchFilter,)
+    search_fields = ['name']
+    filter_backends = (filters.SearchFilter,)
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Component.objects.all()
-    search_fields = ["name", "product_code"]
+    search_fields = ["name", "sku", "upc"]
     serializer_class = ComponentSerializer
 
 

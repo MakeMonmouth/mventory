@@ -2,9 +2,9 @@
 
 An inventory solution for Makers
 
-![GitGuardian Security Checks](https://github.com/proffalken/mventory/actions/workflows/gitguardian.yml/badge.svg)
- ![Django Tests](https://github.com/proffalken/mventory/actions/workflows/django_checks.yml/badge.svg)
- ![Container Builds](https://github.com/proffalken/mventory/actions/workflows/django_checks.yml/badge.svg)
+![GitGuardian Security Checks](https://github.com/makemonmouth/mventory/actions/workflows/gitguardian.yml/badge.svg)
+ ![Django Tests](https://github.com/makemonmouth/mventory/actions/workflows/django_checks.yml/badge.svg)
+ ![Container Builds](https://github.com/makemonmouth/mventory/actions/workflows/django_checks.yml/badge.svg)
 
 
 ## What is it?
@@ -45,7 +45,7 @@ This may feel like overkill for a small home setup, but if you're working in a M
 
 The platform now has *very* basic support for Octopart.  If you fill in the `mpn` (Manufacturer's Part Number) on a component it will return the first datasheet it finds on Octopart as a URL to the PDF.
 
-In future, I hope to add the ability to return images of the product and many more of the product details that are available, so if you'd like [a specific field from the Octopart API](https://octopart.com/api/v4/reference) returned, just [file an issue](https://github.com/proffalken/mventory/issues)!
+In future, I hope to add the ability to return images of the product and many more of the product details that are available, so if you'd like [a specific field from the Octopart API](https://octopart.com/api/v4/reference) returned, just [file an issue](https://github.com/makemonmouth/mventory/issues)!
 
 ## How do I install it?
 
@@ -56,6 +56,7 @@ $ mkvirtualenv mventory
 $ pip install -r requirements.txt
 $ echo "MVENTORY_SECRET_KEY=$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;)" >> .env
 $ echo "MVENTORY_OCTOPART_API_KEY=<your octopart.com api key> >> .env"
+$ echo "MVENTORY_HOSTNAME=<YOUR HOSTNAME OR IP ADDRESS>:<YOUR PORT NUMBER>"
 $ source .env
 $ ./manage.py migrate
 $ ./manage.py createsuperuser # Create your initial user
@@ -63,6 +64,8 @@ $ ./manage.py runserver
 ```
 
 You can then browse to http://localhost:8000/admin and log in to create your buildings, rooms, and other sections/components.
+
+**NOTE:** You **MUST** set the `MVENTORY_HOSTNAME` variable to the correct value in order for this application to work.  This is a [requirement of Django](https://docs.djangoproject.com/en/3.2/ref/settings/#allowed-hosts)
 
 ### Database configuration
 
@@ -93,7 +96,7 @@ Containers are available for the following architectures:
 
 This should allow you to easily deploy Mventory on all kinds of platforms from enterprise servers to Raspberry Pi-style devices.
 
-The container is [available from the packages page](https://github.com/users/proffalken/packages/container/package/mventory) and you'll want to pass the following environment variables to your container in order to get up and running:
+The container is [available from the packages page](https://github.com/users/makemonmouth/packages/container/package/mventory) and you'll want to pass the following environment variables to your container in order to get up and running:
 
 ```bash
 export MVENTORY_DB_ENGINE=<database engine>
@@ -154,7 +157,7 @@ curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0
 curl -H 'Accept: application/json; indent=4' -u admin:password123 http://127.0.0.1:8000/rest/components/?search=555 # return all components with the value "555" in their name or product id
 ```
 
-More features will be added in future, so keep an eye on the [issue tracker](https://github.com/proffalken/mventory/labels/enhancement) to see what's coming up!
+More features will be added in future, so keep an eye on the [issue tracker](https://github.com/makemonmouth/mventory/labels/enhancement) to see what's coming up!
 
 ## How do I contribute?
 

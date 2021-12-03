@@ -97,4 +97,8 @@ class OctopartClient:
                 'reference': mpn,
             })
         resp = self.execute(dsl, {'queries': queries})
-        return json.loads(resp)['data']['multi_match']
+        results = json.loads(resp)
+        if "errors" in results:
+            return {}
+        else:
+            return results['data']['multi_match'] 

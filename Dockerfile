@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.8.10-slim-buster
+FROM python:3.8-slim-buster
 ENV PYTHONUNBUFFERED=1
 RUN apt update && apt upgrade -y
 RUN apt install -y gcc libmariadbclient-dev libsqlite3-dev libpq-dev
@@ -11,4 +11,4 @@ RUN rm -rf /opt/app/data/*.sqlite3
 
 EXPOSE 8000
 
-ENTRYPOINT ["./manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["./scripts/startup.sh"]

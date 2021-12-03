@@ -1,3 +1,4 @@
+import os
 from .utils import OctopartClient
 from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
 from rest_framework import serializers
@@ -29,16 +30,18 @@ class ComponentSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_octopart_data(self, obj):
         op_data = {}
-        if obj.mpn is not None:
-            oc = OctopartClient()
-            parts_res = oc.match_mpns([obj.mpn])
-            op_data["hits"] = parts_res[0]["hits"]
-            if op_data["hits"] > 0:
-                for doc in parts_res[0]["parts"][0]["document_collections"][0]["documents"]:
-                    if doc["name"] == "Datasheet":
-                        op_data["datasheet_url"] = doc["url"]
-                    else:
-                        op_data["datasheet_url"] = None
+        if os.getenv("MVENTORY_OCTOPART_API_KEY"):
+            if obj.mpn is not None:
+                oc = OctopartClient()
+                parts_res = oc.match_mpns([obj.mpn])
+                if parts_res != {}:
+                    op_data["hits"] = parts_res[0]["hits"]
+                    if op_data["hits"] > 0:
+                        for doc in parts_res[0]["parts"][0]["document_collections"][0]["documents"]:
+                            if doc["name"] == "Datasheet":
+                                op_data["datasheet_url"] = doc["url"]
+                            else:
+                                op_data["datasheet_url"] = None
         return op_data
 
     class Meta:
