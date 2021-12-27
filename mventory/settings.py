@@ -161,7 +161,7 @@ OCTOPART_API_ENDPOINT='https://octopart.com/api/v4/endpoint'
 # Logging
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
     'formatters': {
         'json': {'()': 'pythonjsonlogger.jsonlogger.JsonFormatter'},
         'standard': {
@@ -176,7 +176,7 @@ LOGGING = {
             'formatter': 'standard',
         },
         'loki': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'class': 'logging_loki.LokiHandler',
             'url': f"{os.getenv('MVENTORY_LOKI_HOST')}/loki/api/v1/push",
             'tags': {"app": "mventory", "env": "dev"},

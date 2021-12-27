@@ -1,19 +1,24 @@
 import os
+import logging
 from .utils import OctopartClient
 from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
 from rest_framework import serializers
 
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 class BuildingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Building
         fields = ['url', 'name', 'address', 'postcode']
+        logger.info("Serialising Buildings")
 
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
         fields = ['url', 'name', 'building']
+        logger.info("Serialising Rooms")
 
 class StorageUnitSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -32,6 +37,7 @@ class ComponentSerializer(serializers.HyperlinkedModelSerializer):
         op_data = {}
         if os.getenv("MVENTORY_OCTOPART_API_KEY"):
             if obj.mpn is not None:
+                logger.debug(f"Found Octopart API Key and MPN, retrieving data for {obj.name}")
                 oc = OctopartClient()
                 parts_res = oc.match_mpns([obj.mpn])
                 if parts_res != {}:
