@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 
+import logging_loki
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -140,6 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.getenv("MVENTORY_STATIC_ROOT")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -154,3 +157,58 @@ REST_FRAMEWORK = {
 # Octopart
 OCTOPART_API_KEY=os.getenv('MVENTORY_OCTOPART_API_KEY')
 OCTOPART_API_ENDPOINT='https://octopart.com/api/v4/endpoint'
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'json': {'()': 'pythonjsonlogger.jsonlogger.JsonFormatter'},
+        'standard': {
+            'format': '%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] [traceID=%(otelTraceID)s spanID=%(otelSpanID)s resource.service.name=%(otelServiceName)s] - %(message)s',
+            'datefmt': '%d-%m-%Y %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+        'loki': {
+            'level': 'DEBUG',
+            'class': 'logging_loki.LokiHandler',
+            'url': f"{os.getenv('MVENTORY_LOKI_HOST')}/loki/api/v1/push",
+            'tags': {"app": "mventory", "env": "dev"},
+            'version': "1",
+            'formatter': 'json',
+        },
+    },
+    'loggers': {
+        'root': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.server': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.security': {
+            'handlers': ['loki', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        }
+    }
+}

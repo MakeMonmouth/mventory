@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 
 # Create your views here.
@@ -12,6 +13,9 @@ from inventory.serializers import (
         ComponentMeasurementUnitSerializer
         )
 
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
+
 
 def index(request):
     return render(request, 'index.html')
@@ -20,6 +24,7 @@ class BuildingViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    logger.info("Creating the building view")
     queryset = Building.objects.all().order_by('name')
     search_fields = ['name', 'address', 'postcode']
     filter_backends = (filters.SearchFilter,)
