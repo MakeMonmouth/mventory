@@ -62,6 +62,7 @@ jobs:
         MVENTORY_DB_USER: ${{ matrix.db_user }}
         MVENTORY_DB_NAME: ${{ matrix.db }}
         MVENTORY_DB_HOST: 127.0.0.1
+        DJANGO_SETTINGS_MODULE: mventory.settings
         MVENTORY_DB_PORT: ${{ matrix.db_port }}
         MVENTORY_DB_PASSWORD: hunter2
         MVENTORY_SECRET_KEY: ${{ secrets.MVENTORY_SECRET_KEY }}
