@@ -6,7 +6,9 @@ from .models import (ComponentMeasurementUnit,
                     Room,
                     StorageUnit,
                     StorageBin,
-                    Component)
+                    Component,
+                    MembershipLevel,
+                    MemberMembershipLevel)
 
 admin.site.register(ComponentMeasurementUnit)
 admin.site.register(Building)
@@ -14,3 +16,5 @@ admin.site.register(Room)
 admin.site.register(StorageUnit)
 admin.site.register(StorageBin)
 admin.site.register(Component)
+admin.site.register(MembershipLevel)
+admin.site.register(MemberMembershipLevel)
