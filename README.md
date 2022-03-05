@@ -118,7 +118,15 @@ $ docker exec -ti <container id from above> /bin/bash
 > ./manage.py createsuperuser # Run this inside the container
 ```
 
-Once you've done this, you should be able to visit the container in a web browser and log in with your superuser credentials.
+Once you've done this, you'll want to point a webserver capable of performing a "reverse proxy" at the container port 9000, and then you should be able to visit the webserver in a web browser and log in with your superuser credentials.
+
+For the reverse proxy, you can easily use Nginx however we recommend you use [Caddy](https://www.caddyserver.com/) and there is a sample Caddyfile you can modify located at `deployment_options/docker-compose/Caddyfile`.  Alternatively, if you use the Docker Compose setup below then you will automatically get MVentory, the database server, and Caddy as a frontend all talking to each other.
+
+**NOTE:** There is now a [Docker Compose](https://docs.docker.com/compose/) setup available and you can run it by setting the above environment variables before running the following command:
+
+```
+docker-compose -f deployment_options/docker-compose/docker-compose.yml up
+```
 
 ## What does it look like?
 
