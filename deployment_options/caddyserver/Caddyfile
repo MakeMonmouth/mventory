@@ -1,0 +1,6 @@
+:8081
+
+reverse_proxy localhost:9000
+file_server /static/* {
+    root assets
+}
