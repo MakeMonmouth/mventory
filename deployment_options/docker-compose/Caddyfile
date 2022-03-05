@@ -1,9 +1,14 @@
 :8080
 
-reverse_proxy mventory:9000
-file_server /static/* {
-    root assets
+handle_path /static/* {
+	root * /opt/app/assets
+	file_server
+}
+
+handle {
+	reverse_proxy mventory:9000
 }
 log {
-    format json
+	format json
 }
+
