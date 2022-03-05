@@ -11,4 +11,4 @@ RUN rm -rf /opt/app/data/*.sqlite3
 
 EXPOSE 8000
 
-ENTRYPOINT ["./scripts/startup.sh"]
+ENTRYPOINT ["./scripts/prod_deploy.sh"]

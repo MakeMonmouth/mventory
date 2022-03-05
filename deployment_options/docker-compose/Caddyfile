@@ -1,0 +1,9 @@
+:8080
+
+reverse_proxy mventory:9000
+file_server /static/* {
+    root assets
+}
+log {
+    format json
+}
