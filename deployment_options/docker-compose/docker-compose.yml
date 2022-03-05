@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  pgsql:
+    image: public.ecr.aws/bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'pgsql_data:/bitnami/pgsql'
+    environment:
+      - POSTGRES_PASSWORD=pgsql123
+      - POSTGRES_DB=mventory
+    networks:
+      - mventory
+
+  mventory:
+    build: $PWD
+    environment:
+      - MVENTORY_SECRET_KEY='TEST'
+      - MVENTORY_DEBUG=True
+      - MVENTORY_HOSTNAME=${MVENTORY_HOSTNAME}
+      - MVENTORY_OCTOPART_API_KEY='UNSET'
+      - MVENTORY_STATIC_ROOT=/var/www/mventory/static
+      - DJANGO_SETTINGS_MODULE=mventory.settings
+      - MVENTORY_DB_ENGINE=postgresql
+      - MVENTORY_DB_NAME=mventory
+      - MVENTORY_DB_USER=postgres
+      - MVENTORY_DB_HOST=pgsql
+      - MVENTORY_DB_PASSWORD=pgsql123
+    networks:
+      - mventory
+    depends_on:
+      - pgsql
+    ports:
+      - "9000:9000"
+
+  caddy:
+    image: public.ecr.aws/docker/library/caddy:latest
+    networks:
+      - mventory
+    depends_on:
+      - pgsql
+      - mventory
+    volumes:
+      - $PWD/deployment_options/docker-compose/Caddyfile:/etc/caddy/Caddyfile
+    ports:    
+      - "8180:8080"
+
+
+volumes:
+  pgsql_data:
+    driver: local
+
+networks:
+  mventory:
+    driver: bridge
