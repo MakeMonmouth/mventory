@@ -166,4 +166,9 @@ Thumbs.db
 .cache_ggshield
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+
+#### MVENTORY CUSTOM RULES ####
+
+# Don't commit Assets to git otherwise we're duplicating files
 #
+assets
