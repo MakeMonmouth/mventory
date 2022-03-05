@@ -8,25 +8,25 @@ services:
     volumes:
       - 'pgsql_data:/bitnami/pgsql'
     environment:
-      - POSTGRES_PASSWORD=pgsql123
-      - POSTGRES_DB=mventory
+      - POSTGRES_PASSWORD=${MVENTORY_DB_PASSWORD}
+      - POSTGRES_DB=${MVENTORY_DB_NAME}
     networks:
       - mventory
 
   mventory:
     build: $PWD
     environment:
-      - MVENTORY_SECRET_KEY='TEST'
-      - MVENTORY_DEBUG=True
+      - MVENTORY_SECRET_KEY=${MVENTORY_SECRET_KEY}
+      - MVENTORY_DEBUG=${MVENTORY_DEBUG}
       - MVENTORY_HOSTNAME=${MVENTORY_HOSTNAME}
-      - MVENTORY_OCTOPART_API_KEY='UNSET'
+      - MVENTORY_OCTOPART_API_KEY=${MVENTORY_OCTOPART_API_KEY}
       - MVENTORY_STATIC_ROOT=/var/www/mventory/static
       - DJANGO_SETTINGS_MODULE=mventory.settings
-      - MVENTORY_DB_ENGINE=postgresql
-      - MVENTORY_DB_NAME=mventory
-      - MVENTORY_DB_USER=postgres
-      - MVENTORY_DB_HOST=pgsql
-      - MVENTORY_DB_PASSWORD=pgsql123
+      - MVENTORY_DB_ENGINE=${MVENTORY_DB_ENGINE}
+      - MVENTORY_DB_NAME=${MVENTORY_DB_NAME}
+      - MVENTORY_DB_USER=${MVENTORY_DB_USER}
+      - MVENTORY_DB_HOST=${MVENTORY_DB_HOST}
+      - MVENTORY_DB_PASSWORD=${MVENTORY_DB_PASSWORD}
     networks:
       - mventory
     depends_on:

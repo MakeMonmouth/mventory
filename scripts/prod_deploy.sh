@@ -2,10 +2,12 @@
 
 set -eux
 
+env | grep MV
+
 python manage.py wait_for_db
 python manage.py collectstatic --noinput
 python manage.py migrate
 
-unset MVENTORY_DEBUG
+#unset MVENTORY_DEBUG
 
-uwsgi --http-socket :9000 --workers 4 --master --enable-threads --module mventory.wsgi
+uwsgi --ini uwsgi.ini
