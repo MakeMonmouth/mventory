@@ -89,9 +89,11 @@ class ComponentSupplier(ExportModelOperationsMixin('ComponentSupplier'),models.M
 
     component = models.ForeignKey('Component',models.SET_NULL,related_name='components',null=True,blank=True)
     supplier = models.ForeignKey('Supplier',models.SET_NULL,related_name='suppliers',null=True,blank=True)
-    cost = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    bought_at = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    rrp = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    buying_discount_from_rrp = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
     markup_percentage = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
-    price = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    members_price = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
     currency = models.CharField(max_length = 3,
             choices = CURRENCIES,
             default = BRITISH_POUND)
