@@ -18,7 +18,7 @@ class Supplier(ExportModelOperationsMixin('Supplier'),models.Model):
     components_available = models.ManyToManyField('Component', through='ComponentSupplier')
 
     def __str__(self):
-        return self.unit_name
+        return self.name
 
 
 class Building(ExportModelOperationsMixin('Building'), models.Model):
@@ -75,9 +75,27 @@ class Component(ExportModelOperationsMixin('Component'), models.Model):
 
 
 class ComponentSupplier(ExportModelOperationsMixin('ComponentSupplier'),models.Model):
+    BRITISH_POUND = 'GBP'
+    EURO = 'EUR'
+    SWISS_FRANC = 'CHF'
+    US_DOLLAR = 'USD'
+
+    CURRENCIES = [
+            (BRITISH_POUND, 'British Pound'),
+            (EURO, 'Euro'),
+            (SWISS_FRANC, 'Swiss Franc'),
+            (US_DOLLAR, 'US Dollar')
+            ]
+
     component = models.ForeignKey('Component',models.SET_NULL,related_name='components',null=True,blank=True)
     supplier = models.ForeignKey('Supplier',models.SET_NULL,related_name='suppliers',null=True,blank=True)
     cost = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
     markup_percentage = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
     price = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    currency = models.CharField(max_length = 3,
+            choices = CURRENCIES,
+            default = BRITISH_POUND)
 
+
+    def __str__(self):
+        return f"{self.component} from {self.supplier}: {self.price}{self.currency}"
