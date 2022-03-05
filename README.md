@@ -108,14 +108,13 @@ export MVENTORY_SECRET_KEY=<some random string>
 export MVENTORY_OCTOPART_API_KEY=<your octopart.com API key>
 ```
 
-**NOTE: All the `DB_` variables are required if you want to connect to MySQL, if you want to use the built-in SQLite3 database then you can omit these**
+**NOTE: All the `DB_` variables are required if you want to connect to MySQL or PostgreSQL, if you want to use the built-in SQLite3 database then you can omit these**
 
-The container exposes the service on port 8000, and once you've got the container up and running you'll need to run the migrations and create the admin user as follows:
+The container exposes the service on port 8000, and once you've got the container up and running you'll need to create the admin user as follows:
 
 ```bash
 $ docker ps | grep mventory # Get the Container ID from here
 $ docker exec -ti <container id from above> /bin/bash
-> ./manage.py migrate # Run this inside the container
 > ./manage.py createsuperuser # Run this inside the container
 ```
 
