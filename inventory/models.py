@@ -10,6 +10,16 @@ class ComponentMeasurementUnit(ExportModelOperationsMixin('ComponentMeasurementU
     def __str__(self):
         return self.unit_name
 
+class Supplier(ExportModelOperationsMixin('Supplier'),models.Model):
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=200,null=True, blank=True)
+    website = models.URLField(null=True,blank=True)
+    contact_email = models.EmailField(null=True,blank=True)
+    components_available = models.ManyToManyField('Component', through='ComponentSupplier')
+
+    def __str__(self):
+        return self.unit_name
+
 
 class Building(ExportModelOperationsMixin('Building'), models.Model):
     name = models.CharField(max_length=200)
@@ -57,6 +67,17 @@ class Component(ExportModelOperationsMixin('Component'), models.Model):
     storage_bin = models.ManyToManyField(StorageBin)
     measurement_unit = models.ForeignKey(ComponentMeasurementUnit, on_delete=models.CASCADE)
     qty = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    supplier_options = models.ManyToManyField('Supplier', through='ComponentSupplier')
+
 
     def __str__(self):
         return self.name
+
+
+class ComponentSupplier(ExportModelOperationsMixin('ComponentSupplier'),models.Model):
+    component = models.ForeignKey('Component',models.SET_NULL,related_name='components',null=True,blank=True)
+    supplier = models.ForeignKey('Supplier',models.SET_NULL,related_name='suppliers',null=True,blank=True)
+    cost = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    markup_percentage = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+    price = models.DecimalField(decimal_places=2,max_digits=7,null=True,blank=True)
+
