@@ -4,28 +4,23 @@ metadata:
   name: Mventory
   description: The inventory backend for Makerspaces
   annotations:
+    backstage.io/techdocs-ref: dir:docs/
     github.com/project-slug: 'makemonmouth/mventory'
     grafana/tag-selector: "mventory"
-    prometheus.io/alert: HighRequestLatency
-    prometheus.io/rule: mventory
 spec:
-  type: website
+  type: service
   owner: matt@doics.co
   lifecycle: production
-  dependsOn: 
-    - Resource:default/MVentory-Database
+  providesApis:
+    - mventory-api
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Resource
+kind: API
 metadata:
-  name: MVentory-Database
-  description: The database backend for MVentry
-  annotations:
-    github.com/project-slug: 'makemonmouth/mventory'
-    grafana/tag-selector: "mventory"
-    prometheus.io/alert: HighRequestLatency
-    prometheus.io/rule: HighRequestLatency
+  name: mventory-api
+  description: The MVentory API
 spec:
-  type: database
-  owner: matt@doics.co
+  type: internal
   lifecycle: production
+  owner: matt@doics.co
+  definition: "The MVentory API"
