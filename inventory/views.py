@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
+from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit, Supplier
 from rest_framework import viewsets, permissions, filters
 from inventory.serializers import (
         BuildingSerializer,
@@ -9,7 +9,8 @@ from inventory.serializers import (
         StorageUnitSerializer,
         StorageBinSerializer,
         ComponentSerializer,
-        ComponentMeasurementUnitSerializer
+        ComponentMeasurementUnitSerializer,
+        SupplierSerializer
         )
 
 
@@ -79,4 +80,12 @@ class ComponentMeasurementUnitViewSet(viewsets.ModelViewSet):
     """
     queryset = ComponentMeasurementUnit.objects.all()
     serializer_class = ComponentMeasurementUnitSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class SupplierViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows suppliers to be viewed or edited.
+    """
+    queryset = Supplier.objects.all()
+    serializer_class = SupplierSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]

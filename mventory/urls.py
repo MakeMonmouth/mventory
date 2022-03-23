@@ -27,6 +27,7 @@ router.register(r'storage_units', views.StorageUnitViewSet)
 router.register(r'storage_bins', views.StorageBinViewSet)
 router.register(r'components', views.ComponentViewSet)
 router.register(r'component_measurements', views.ComponentMeasurementUnitViewSet)
+router.register(r'suppliers', views.SupplierViewSet)
 
 urlpatterns = [
     path('', views.index),

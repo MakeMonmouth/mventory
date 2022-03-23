@@ -1,6 +1,6 @@
 import os
 from .utils import OctopartClient
-from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit
+from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit, ComponentSupplier, Supplier
 from rest_framework import serializers
 
 
@@ -25,8 +25,14 @@ class StorageBinSerializer(serializers.HyperlinkedModelSerializer):
         model = StorageBin
         fields = ['url', 'name', 'short_code', 'unit_row','unit_column', 'storage_unit']
 
+class SupplierSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Supplier
+        fields = ['url', 'name', 'description']
+
 class ComponentSerializer(serializers.HyperlinkedModelSerializer):
     octopart_data = serializers.SerializerMethodField()
+    component_prices = serializers.SerializerMethodField()
 
     def get_octopart_data(self, obj):
         op_data = {}
@@ -44,9 +50,28 @@ class ComponentSerializer(serializers.HyperlinkedModelSerializer):
                                 op_data["datasheet_url"] = None
         return op_data
 
+    def get_component_prices(self, obj):
+        prices = []
+
+        for supplier in obj.supplier_options.all():
+            suppliers = serializers.HyperlinkedRelatedField(
+                view_name='suppliers',
+                lookup_field='supplier',
+                read_only=True
+            )
+            details = {}
+            details['supplier'] = supplier.name
+            cs_details = ComponentSupplier.objects.get(supplier=supplier, component=obj)
+            details['price'] = cs_details.members_price
+            details['currency'] = cs_details.currency
+            details['included_donation_amount'] = cs_details.members_price - cs_details.bought_at
+            prices.append(details)
+
+        return prices
+
     class Meta:
         model = Component
-        fields = ['url', 'name', 'sku', 'mpn', 'upc', 'octopart_data', 'storage_bin','measurement_unit', 'qty']
+        fields = ['url', 'name', 'sku', 'mpn', 'upc', 'octopart_data', 'storage_bin','measurement_unit', 'qty', 'component_prices']
         depth = 4
 
 class ComponentMeasurementUnitSerializer(serializers.HyperlinkedModelSerializer):

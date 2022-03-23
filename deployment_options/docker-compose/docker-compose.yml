@@ -43,6 +43,7 @@ services:
       - mventory
     volumes:
       - $PWD/deployment_options/docker-compose/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/:/opt/app
     ports:    
       - "8180:8080"
 
