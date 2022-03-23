@@ -1,6 +1,6 @@
 import os
 from .utils import OctopartClient
-from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit, ComponentSupplier
+from .models import Building, Room, StorageUnit, StorageBin, Component, ComponentMeasurementUnit, ComponentSupplier, Supplier
 from rest_framework import serializers
 
 
@@ -24,6 +24,11 @@ class StorageBinSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = StorageBin
         fields = ['url', 'name', 'short_code', 'unit_row','unit_column', 'storage_unit']
+
+class SupplierSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Supplier
+        fields = ['url', 'name', 'description']
 
 class ComponentSerializer(serializers.HyperlinkedModelSerializer):
     octopart_data = serializers.SerializerMethodField()
@@ -49,12 +54,17 @@ class ComponentSerializer(serializers.HyperlinkedModelSerializer):
         prices = []
 
         for supplier in obj.supplier_options.all():
+            suppliers = serializers.HyperlinkedRelatedField(
+                view_name='suppliers',
+                lookup_field='supplier',
+                read_only=True
+            )
             details = {}
-            details['name'] = supplier.name
+            details['supplier'] = supplier.name
             cs_details = ComponentSupplier.objects.get(supplier=supplier, component=obj)
-            details['price'] = cs_details.price
+            details['price'] = cs_details.members_price
             details['currency'] = cs_details.currency
-            details['included_donation_amount'] = cs_details.price - cs_details.cost
+            details['included_donation_amount'] = cs_details.members_price - cs_details.bought_at
             prices.append(details)
 
         return prices
