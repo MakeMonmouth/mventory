@@ -12,3 +12,13 @@ spec:
   lifecycle: production
   providesApis:
     - mventory-api
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: mventory-api
+  description: The MVentory API
+spec:
+  type: internal
+  lifecycle: production
+  owner: matt@doics.co
