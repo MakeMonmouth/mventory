@@ -68,5 +68,6 @@ traitlets==5.1.1
 urllib3==1.26.6
 watchdog==2.1.6
 wcwidth==0.2.5
+whitenoise==6.0.0
 wrapt==1.12.1
 zipp==3.7.0
