@@ -8,6 +8,7 @@ metadata:
     github.com/project-slug: 'makemonmouth/mventory'
     grafana/tag-selector: "mventory"
     sentry.io/project-slug: "mventory"
+    prometheus.io/rules: sloth-slo-sli-recordings-mventory-sloth-slo-mventory-0
 spec:
   type: service
   owner: matt@doics.co
