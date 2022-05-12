@@ -15,6 +15,9 @@ spec:
   lifecycle: production
   providesApis:
     - mventory-api
+  links:
+    - url: https://mventory.herokuapp.com/
+      title: MVentory Demo Site
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
